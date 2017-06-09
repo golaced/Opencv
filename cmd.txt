@@ -1,0 +1,61 @@
+catkin_make -DCATKIN_WHITELIST_PACKAGES="serial_oldx"
+\u6062\u590d\u7f16\u8bd1\u6240\u6709\u7684\u5305
+catkin_make -DCATKIN_WHITELIST_PACKAGES=""
+sudo chmod 666 /dev/ttyUSB0
+rosparam set use_sim_time true
+source devel/setup.bash  
+roslaunch cartographer_ros demo_backpack_2d.launch bag_filename:=${HOME}/Downloads/cartographer_paper_deutsches_museum.bag
+rosbag play --clock basic_localization_stage.bag
+roslaunch rplidar_ros hector_mapping_demo.launch
+roslaunch rplidar_ros rplidar.launch
+roslaunch rplidar_ros view_rplidar.launch 
+
+roslaunch cartographer_ros demo_backpack_2d.launch bag_filename:=${HOME}/Downloads/cartographer_paper_deutsches_museum.bag
+roslaunch cartographer_ros demo_revo_lds1.launch
+
+#google slam
+roslaunch cartographer_ros demo_revo_lds1.launch
+roslaunch rplidar_ros hector_mapping_demo1.launch
+
+cat /sys/class/thermal/thermal_zone0/temp
+sudo cat /sys/devices/system/cpu/cpu2/cpufreq/cpuinfo_cur_freq
+
+#PTAM
+roslaunch ptam ptam1.launch
+roslaunch aruco_mapping aruco_mapping1.launch
+[rplidarNode-1] escalating to SIGTERM
+
+ttyAMA0
+sudo date  --s="2017-09-4 14:0:01" #force set time
+
+ifconfig   #check ip
+hostname   #check hostname
+
+lsusb  
+df -h  
+
+pkg-config --modversion opencv
+sudo nano /etc/rc.local
+ 
+ps -ef |grep MF   #check the auto run task
+sudo kill 599
+
+uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding mjpeg 
+
+source devel/setup.bash     #run before ros launch
+ 
+rosrun rqt_graph rqt_graph   #view the flow chart of ros nodes
+rostopic list -v             #view the list of ros nodes` topic
+rostopic echo tf             #view topic
+rostopic type tf
+rosmsg show tf2_msgs/TFMessage
+
+rosdep install --from-paths src --ignore-src
+roscreate-pkg camera_cv std_msgs rospy roscpp
+catkin_create_pkg camera_cv roscpp std_msgs cv_bridge image_transport sensor_msgs 
+
+rosrun serial_oldx uart
+roslaunch aprilslam slam2.launch
+roslaunch usb_cam usb_cam-test320.launch  
+rosrun image_view image_view image:=/usb_cam/image_rect
+rosrun camera_calibration cameracalibrator.py --size 8x6 --square 0.015 image:=/usb_cam/image_rect camera:=/usb_cam  

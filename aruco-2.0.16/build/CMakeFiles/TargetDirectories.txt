@@ -1,0 +1,13 @@
+/home/pi/Downloads/aruco-2.0.16/build/src/CMakeFiles/aruco.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_calibration/CMakeFiles/aruco_calibration.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_calibration/CMakeFiles/aruco_calibration_fromimages.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_markermap/CMakeFiles/aruco_create_markermap.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_markermap/CMakeFiles/aruco_markermap_pix2meters.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils/CMakeFiles/aruco_print_dictionary.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils/CMakeFiles/aruco_print_marker.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils/CMakeFiles/aruco_simple.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_markermap/CMakeFiles/aruco_simple_markermap.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils/CMakeFiles/aruco_test.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils_markermap/CMakeFiles/aruco_test_markermap.dir
+/home/pi/Downloads/aruco-2.0.16/build/utils/CMakeFiles/aruco_tracker.dir
+/home/pi/Downloads/aruco-2.0.16/build/CMakeFiles/uninstall.dir

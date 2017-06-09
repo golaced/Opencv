@@ -1,0 +1,17 @@
+﻿dwc_otg.lpm_enable=0 console=serial1,115200  console=tty1 root=/dev/mmcblk0p2  kgdboc=serial1,115200 rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait
+
+
+
+[Unit]
+Description=Configure Bluetooth Modems connected by UART
+ConditionPathIsDirectory=/proc/device-tree/soc/gpio@7e200000/bt_pins
+Before=bluetooth.service
+After=dev-serial1.device
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/btuart
+
+[Install]
+WantedBy=multi-user.target
+
