@@ -1,0 +1,226 @@
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wshorten64to32 failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_df315/fast"
+/usr/bin/make -f CMakeFiles/cmTC_df315.dir/build.make CMakeFiles/cmTC_df315.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_df315.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -DCOMPILER_SUPPORT_Wshorten64to32 -Werror   -Wshorten-64-to-32 -o CMakeFiles/cmTC_df315.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wshorten-64-to-32'
+CMakeFiles/cmTC_df315.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_df315.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_df315.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_df315/fast' failed
+make: *** [cmTC_df315/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wenumconversion failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_1e576/fast"
+/usr/bin/make -f CMakeFiles/cmTC_1e576.dir/build.make CMakeFiles/cmTC_1e576.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_1e576.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wenumconversion -Werror   -Wenum-conversion -o CMakeFiles/cmTC_1e576.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wenum-conversion'
+CMakeFiles/cmTC_1e576.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_1e576.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_1e576.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_1e576/fast' failed
+make: *** [cmTC_1e576/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Wcpp11extensions failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_74fbf/fast"
+/usr/bin/make -f CMakeFiles/cmTC_74fbf.dir/build.make CMakeFiles/cmTC_74fbf.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_74fbf.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -DCOMPILER_SUPPORT_Wcpp11extensions -Werror   -Wc++11-extensions -o CMakeFiles/cmTC_74fbf.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Wc++11-extensions'
+CMakeFiles/cmTC_74fbf.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_74fbf.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_74fbf.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_74fbf/fast' failed
+make: *** [cmTC_74fbf/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd981 failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_27b2e/fast"
+/usr/bin/make -f CMakeFiles/cmTC_27b2e.dir/build.make CMakeFiles/cmTC_27b2e.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_27b2e.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd981 -Werror   -wd981 -o CMakeFiles/cmTC_27b2e.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd981'
+CMakeFiles/cmTC_27b2e.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_27b2e.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_27b2e.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_27b2e/fast' failed
+make: *** [cmTC_27b2e/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_wd2304 failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_ea034/fast"
+/usr/bin/make -f CMakeFiles/cmTC_ea034.dir/build.make CMakeFiles/cmTC_ea034.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_ea034.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_wd2304 -Werror   -wd2304 -o CMakeFiles/cmTC_ea034.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-wd2304'
+CMakeFiles/cmTC_ea034.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_ea034.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_ea034.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_ea034/fast' failed
+make: *** [cmTC_ea034/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_STRICTANSI failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_e71d2/fast"
+/usr/bin/make -f CMakeFiles/cmTC_e71d2.dir/build.make CMakeFiles/cmTC_e71d2.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_e71d2.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_STRICTANSI -Werror   -strict-ansi -o CMakeFiles/cmTC_e71d2.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-strict-ansi'
+CMakeFiles/cmTC_e71d2.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_e71d2.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_e71d2.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_e71d2/fast' failed
+make: *** [cmTC_e71d2/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test COMPILER_SUPPORT_Qunusedarguments failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_f9afc/fast"
+/usr/bin/make -f CMakeFiles/cmTC_f9afc.dir/build.make CMakeFiles/cmTC_f9afc.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_f9afc.dir/src.cxx.o
+/usr/bin/c++     -pedantic -Wall -Wextra -Wundef -Wcast-align -Wchar-subscripts -Wnon-virtual-dtor -Wunused-local-typedefs -Wpointer-arith -Wwrite-strings -Wformat-security -Wlogical-op -Wdouble-promotion -Wno-psabi -Wno-variadic-macros -Wno-long-long -fno-check-new -fno-common -fstrict-aliasing -DCOMPILER_SUPPORT_Qunusedarguments -Werror   -Qunused-arguments -o CMakeFiles/cmTC_f9afc.dir/src.cxx.o -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/src.cxx
+c++: error: unrecognized command line option '-Qunused-arguments'
+CMakeFiles/cmTC_f9afc.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_f9afc.dir/src.cxx.o' failed
+make[1]: *** [CMakeFiles/cmTC_f9afc.dir/src.cxx.o] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_f9afc/fast' failed
+make: *** [cmTC_f9afc/fast] Error 2
+
+Source file was:
+int main() { return 0; }
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -v
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: 
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -c
+
+The output was:
+No such file or directory
+
+
+Compiling the Fortran compiler identification source file "CMakeFortranCompilerId.F" failed.
+Compiler: CMAKE_Fortran_COMPILER-NOTFOUND 
+Build flags: 
+Id flags: -fpp
+
+The output was:
+No such file or directory
+
+
+Determining if the pthread_create exist failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_d5440/fast"
+/usr/bin/make -f CMakeFiles/cmTC_d5440.dir/build.make CMakeFiles/cmTC_d5440.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_d5440.dir/CheckSymbolExists.c.o
+/usr/bin/cc     -o CMakeFiles/cmTC_d5440.dir/CheckSymbolExists.c.o   -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_d5440
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_d5440.dir/link.txt --verbose=1
+/usr/bin/cc       CMakeFiles/cmTC_d5440.dir/CheckSymbolExists.c.o  -o cmTC_d5440 -rdynamic 
+CMakeFiles/cmTC_d5440.dir/CheckSymbolExists.c.o: In function `main':
+CheckSymbolExists.c:(.text+0x38): undefined reference to `pthread_create'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_d5440.dir/build.make:97: recipe for target 'cmTC_d5440' failed
+make[1]: *** [cmTC_d5440] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_d5440/fast' failed
+make: *** [cmTC_d5440/fast] Error 2
+
+File /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <pthread.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef pthread_create
+  return ((int*)(&pthread_create))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_7ed90/fast"
+/usr/bin/make -f CMakeFiles/cmTC_7ed90.dir/build.make CMakeFiles/cmTC_7ed90.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_7ed90.dir/CheckFunctionExists.c.o
+/usr/bin/cc    -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_7ed90.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.6/Modules/CheckFunctionExists.c
+Linking C executable cmTC_7ed90
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_7ed90.dir/link.txt --verbose=1
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create    CMakeFiles/cmTC_7ed90.dir/CheckFunctionExists.c.o  -o cmTC_7ed90 -rdynamic -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_7ed90.dir/build.make:97: recipe for target 'cmTC_7ed90' failed
+make[1]: *** [cmTC_7ed90] Error 1
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_7ed90/fast' failed
+make: *** [cmTC_7ed90/fast] Error 2
+
+
+Determining if the Fortran sgemm exists failed with the following output:
+Change Dir: /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/make" "cmTC_c3fe3/fast"
+/usr/bin/make -f CMakeFiles/cmTC_c3fe3.dir/build.make CMakeFiles/cmTC_c3fe3.dir/build
+make[1]: Entering directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Building Fortran object CMakeFiles/cmTC_c3fe3.dir/testFortranCompiler.f.o
+CMAKE_Fortran_COMPILER-NOTFOUND     -c /home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp/testFortranCompiler.f -o CMakeFiles/cmTC_c3fe3.dir/testFortranCompiler.f.o
+make[1]: CMAKE_Fortran_COMPILER-NOTFOUND: Command not found
+CMakeFiles/cmTC_c3fe3.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_c3fe3.dir/testFortranCompiler.f.o' failed
+make[1]: *** [CMakeFiles/cmTC_c3fe3.dir/testFortranCompiler.f.o] Error 127
+make[1]: Leaving directory '/home/pi/QT/MF/src/eigen3/eigen/build/CMakeFiles/CMakeTmp'
+Makefile:126: recipe for target 'cmTC_c3fe3/fast' failed
+make: *** [cmTC_c3fe3/fast] Error 2
+
+

@@ -4,6 +4,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/calib3d/calib3d.hpp>
 #include <thread>
+#include <stdlib.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdio.h>
@@ -16,11 +17,15 @@
 #include "aruco/aruco.h"
 #include "aruco/cvdrawingutils.h"
 #include "my_serial.h"
+#include "AM/AM.h"
+#include <sstream>
+#include <iomanip>
+#include <fstream>
 #include <wiringSerial.h>
 using namespace std;
 using namespace cv;
 using namespace aruco;
-#define TEST_QR 0
+#define TEST_QR 1
 #define TEST_FLOW 0
 float flow_out[2]={0};
 int fd;
@@ -35,9 +40,68 @@ Attitude attitude_camera;
 std::vector< aruco::Marker > Markers;
 Mat traj(720, 720, CV_8UC3, Scalar::all(255));
 Mat traj_show(720, 720, CV_8UC3, Scalar::all(255));
+Mat map_show(720, 720, CV_8UC3, Scalar::all(255));
+int video_num = 0;
+int write_flag;
+int newfile_flag;
+std::ifstream video_num_read;
+std::ofstream video_num_write;
+std::string video_num_path("/home/pi/QT/MF/video/video_num.txt");
+std::string writer_path("/home/pi/QT/MF/video/");
 
-#define TRANS_WORLD 1
-#define WRITE_VIDEO  0
+string intToString(int v)
+{
+    char buf[32] = {0};
+    snprintf(buf, sizeof(buf), "%u", v);
+
+    string str = buf;
+    return str;
+}
+
+void startWriteVideo(std::ifstream &video_num_read,
+		cv::VideoWriter &video_writer)
+{
+	video_num_read.open(video_num_path.c_str());
+	video_num_read >> video_num;
+	video_num_read.close();
+
+	cout << video_num << endl;
+
+	video_num_write.open(video_num_path.c_str());
+	video_num_write << (video_num + 1);
+	video_num_write.close();
+
+	if (video_writer.isOpened())
+	{
+		video_writer.release();
+	}
+
+	std::stringstream ss;
+	string video_name;
+
+	ss << video_num;
+	ss >> video_name;
+	video_name += ".avi";
+
+	video_writer.open(
+			writer_path + video_name,
+            CV_FOURCC('D', 'I', 'V', 'X'), 15, Size(320, 240));
+
+}
+
+
+void startWriteFile(std::ofstream &gps_writer)
+{
+	std::stringstream ss;
+	string file_name;
+
+	ss << video_num;
+	ss >> file_name;
+	file_name += ".txt";
+	gps_writer.open(writer_path + file_name);
+        gps_writer<<setprecision(15);
+	//gps_writer << "latitude    longitude    height" << endl;
+}
 
 #define MED_WIDTH_NUM 50
 #define MED_FIL_ITEM  20
@@ -250,7 +314,8 @@ Mat Filter_aruco(Mat in,int user_threshold)
   return I_filtered;
 }
 
-
+float marker_map[500], camera_map[4],mark_pos_ero_check,center_fix_flt;
+short cloud_size, lock_cnt,first_mark;
 #define MARKER_USE_320 1
 #if TEST_QR
 void thread_marker(void)
@@ -272,6 +337,8 @@ void* thread_marker(void*)
     string cameraParamFileName("/home/odroid/workspace/QT/MarkerFlow/PS3_640.yml");
     cv::Size InImage_size(640,480);
 #endif
+
+
     aruco::CameraParameters CamParam;
     MarkerDetector MDetector;
     float MarkerSize = MARKER_SIZE;
@@ -288,6 +355,16 @@ void* thread_marker(void*)
     createTrackbar("range", "thes", &t_p_range, 31);
     createTrackbar("filter", "thes", &f_thr, 255);
     createTrackbar("subpix", "thes", &subpix, 20);
+
+    //cv::namedWindow("map", 2);
+    int cloud_sizep=49;//30;
+    int mark_pos_ero_checkp=6*10;
+    int lock_cntp=3;
+    int center_fix_fltp=66;//0.36*100;
+    createTrackbar("cloud_size", "thes", &cloud_sizep, 49);
+    createTrackbar("ero_fix", "thes", &mark_pos_ero_checkp, 100);
+    createTrackbar("fix_cnt", "thes", &lock_cntp, 20);
+    createTrackbar("fix_step", "thes", &center_fix_fltp, 100);
     #endif
     ostringstream ostr_pos;
     ostringstream ostr_angle;
@@ -304,6 +381,10 @@ void* thread_marker(void*)
     cout<<"1_str"<<endl;
 
     cv::TickMeter tm;
+    VideoWriter video_writer;
+    std::ofstream file_writer;
+    string video_read_s("/home/pi/QT/MF/video_r/"+intToString(read_video_num)+".avi");
+    VideoCapture cap1(video_read_s);
     for(;;)
     { // cout<<"1"<<endl;
         tm.reset();
@@ -332,8 +413,8 @@ void* thread_marker(void*)
             cout << CamParam.CameraMatrix << endl;
             cout << CamParam.Distorsion << endl;
         }
-
-
+        if(read_video_num!=0)
+        cap1>>InImage;
         p1 = p1 / 2 * 2 + 1;
         p2 = p2 / 2 * 2 + 1;
         MDetector.setThresholdParamRange(t_p_range);
@@ -348,7 +429,22 @@ void* thread_marker(void*)
        // else
        // CamParam.readFromXMLFile(cal_file);
         MDetector.detect(InImage, Markers, CamParam, MarkerSize);
+        video_writer << InImage;
 
+        static int flag=0;
+       if (save_video&&!flag)
+               {
+                   video_writer.release();
+                   cout << "video_writer.release();" << endl;
+                   file_writer.close();
+                   cout << "file_writer.close();" << endl;
+
+                   startWriteVideo(video_num_read, video_writer);
+                   startWriteFile(file_writer);
+
+                   flag = 1;
+               }
+        float check_in[6][5]={0};
         if(Markers.size()>0 )
         Markers_getArea=Markers[0].getArea();
 
@@ -371,7 +467,7 @@ void* thread_marker(void*)
                 //ostr_angle << "          Pit=" << (int)attitude_camera.Pit << " " << "Yaw=" << (int)attitude_camera.Yaw << " " << "Rol=" << (int)attitude_camera.Rol;
                 ostr_angle << "          Y=" << (int)attitude_camera.Yaw ;//<< " " << "Rol=" << (int)attitude_camera.Rol;
 
-#if TRANS_WORLD
+
                 getCameraPos(Markers[i].Rvec, Markers[i].Tvec, pos_camera);
 
                 ostr_pos.clear();
@@ -383,14 +479,62 @@ void* thread_marker(void*)
                 ostr_pos << "          y=" << (int)pos_camera.y ;//<< " " << "y=" << (int)pos_camera.y ;//<< " " << "z=" << (int)pos_camera.z;
                 putText(InImage, ostr_pos.str(), Markers[i].getCenter() + Point2f(-100, 20), CV_FONT_HERSHEY_SIMPLEX, 0.5, CV_RGB(55, 255, 0), 2);
 
-#endif
+
                // putText(InImage, ostr_angle.str(), Markers[i].getCenter() + Point2f(-100, 20), CV_FONT_HERSHEY_SIMPLEX, 0.5, CV_RGB(55, 255, 0), 2);
 
             }
         }
         coordinate_camera = Point3f(0,0,0);
         getCameraPosWithMarkers(Markers, coordinate_camera,attitude_camera, 3);//
-        //getCameraPosWithMarkers(Markers, coordinate_camera,attitude_camera, 0);//
+        int j=0;
+        for (unsigned int i = 0; i < Markers.size(); i++)
+        {
+            Point3f pos_world(0, 0, 0);
+            Attitude atti_t;
+            if(j<6){
+            getCameraPos(Markers[i].Rvec, Markers[i].Tvec, pos_world);//camera to local marker o dis
+            getAttitude(Markers[i], atti_t);
+
+            check_in[j][0]=pos_world.x;
+            check_in[j][1]=pos_world.y;
+            check_in[j][2]=pos_world.z;
+            check_in[j][3]=atti_t.Yaw;
+            check_in[j++][4]=Markers[i].id;
+             }
+        }
+
+        cloud_size=cloud_sizep;
+        mark_pos_ero_check=(float)mark_pos_ero_checkp/10.;
+        lock_cnt=lock_cntp;
+        center_fix_flt=(float)center_fix_fltp/100.;
+        static short init_map=1;
+        AM( marker_map,  camera_map, &first_mark,check_in[0],check_in[1],check_in[2],check_in[3],check_in[4],check_in[5],
+                cloud_size,  mark_pos_ero_check,  lock_cnt, center_fix_flt,&init_map,0);
+        static float map_draw[100][6];
+        static int cnt_draw_jra=0;
+         j=0;
+        float k=1.23;
+        int offd=600;
+        for(int i=1;i<100;i++){
+         if(marker_map[i + 399]==2){
+         map_draw[i][0]= marker_map[i - 1]*k;
+         map_draw[i][1]= marker_map[i + 99]*k;
+         map_draw[i][2]= marker_map[i + 199] ;
+         map_draw[i][3]= marker_map[i + 299] ;
+
+         map_draw[i][4]=i;
+         if(map_draw[i][5]==0){
+         cout<<i<<" "<<map_draw[i][0]<<" "<<map_draw[i][1]<<endl;
+         map_draw[i][5]=1;
+         circle(map_show, Point(map_draw[i][0]+offd, map_draw[i][1]+offd),8, CV_RGB(0, 0, 255),2);
+         }
+         }
+        }
+        if(cnt_draw_jra++>0){cnt_draw_jra=0;
+        circle(map_show, Point(camera_map[0]*k+offd, camera_map[1]*k+offd),1, CV_RGB(255, 0, 0),2);
+        }
+        cv::imshow("map", map_show);
+        //cout<<marker_map[sel*4+0]<<" "<<marker_map[sel*4+1]<<" "<<marker_map[sel*4+2]<<" "<<marker_map[sel*4+3]<<endl;
        if(show_traj){
         ostr_pos.clear();
         ostr_pos.str("");
@@ -424,12 +568,12 @@ void* thread_marker(void*)
         //show input with augmented information
 
     #if  TEST_QR
+        if(show_camera)
         cv::imshow("thes", InImage);
         // show also the internal image resulting from the threshold operation
         //cv::imshow("thes", MDetector.getThresholdedImage());
 
-        uartSent();
-        uartSent2();
+        uartSent();uartSent2();
 
         if(show_traj){traj = traj_empty.clone();
         cv::imshow("in", traj_show);}
@@ -438,13 +582,20 @@ void* thread_marker(void*)
          cv::imshow("thes", InImage);
    #endif
         tm.stop();
+        static int cnt_time_show;
+        if(cnt_time_show++>10){cnt_time_show=0;
         cout<<"marker:"<<tm.getTimeMilli()<<"ms"<<endl;
+        }
        // cout<<"x=: "<<coordinate_camera.x<<"   y=: "<<coordinate_camera.y<<"  marker:"<<tm.getTimeMilli()<<"ms"<<endl;
 
         char c = (char)waitKey(10);
         if( c == 27 )
             break;
     }
+    video_writer.release();
+    cout << "video_writer.release();" << endl;
+    //file_writer.close();
+    // cout << "file_writer.close();" << endl;
     #if !TEST_QR
     pthread_exit(NULL);
     #endif

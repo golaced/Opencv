@@ -92,21 +92,40 @@ for (int i=0;i<3;i++)
 m44.inv();
 return  cv::Point3f( m44.at<float>(0,0),m44.at<float>(0,1),m44.at<float>(0,2));
 }
-
+#include <Eigen/Dense>
+#include <opencv2/core/eigen.hpp>
+#include <opencv2/opencv.hpp>
+#include <Eigen/Geometry>
 void getCameraPos(cv::Mat Rvec, cv::Mat Tvec, cv::Point3f &pos)
 {
+    vector<Eigen::Vector3d> landmarks_pointXYZ;
 	Mat Rot(3, 3, CV_32FC1);
-	Rodrigues(Rvec, Rot);
-    //cv::Point3f temp_pos=getCameraLocation1(Tvec,Rvec);
-    //cout <<temp_pos<<endl;
+    Rodrigues(Rvec, Rot);
+    Eigen::Matrix3d eigen_r;
+//    Eigen::Vector3d eigen_t;
+    cv2eigen(Rot,eigen_r);
+//    cv2eigen(Tvec,eigen_t);
     Rot = Rot.t();  // rotation of inverse
     Mat pos_camera = -Rot * Tvec*100; // translation of inverse
-   // Mat pos_camera = -  Tvec*100; // translation of inverse
-     // pos.x = temp_pos.x*10;
-    //  pos.y = temp_pos.y*10;
-    pos.x = pos_camera.at<float>(0, 0);
-    pos.y = -pos_camera.at<float>(1, 0);
-    pos.z = pos_camera.at<float>(2, 0);
+    //landmarks_pointXYZ.push_back(eigen_r +eigen_t);
+
+    Eigen::Isometry3d T = Eigen::Isometry3d::Identity();
+    Eigen::AngleAxisd angle(eigen_r);
+    T = angle.inverse();
+    Eigen::Matrix<double,3,1> t;
+    cv::cv2eigen(Tvec, t);
+    t = -1 * angle.inverse().matrix() *t;
+    T(0, 3) = t(0);
+    T(1, 3) = t(1);
+    T(2, 3) = t(2);
+    pos.x = t(0)*100;
+    pos.y = -t(1)*100;
+    pos.z = t(2)*100;
+//cout<<t<<endl;
+//    pos.x = pos_camera.at<float>(0, 0);
+//    pos.y = -pos_camera.at<float>(1, 0);
+//    pos.z = pos_camera.at<float>(2, 0);
+
 }
 
 void getCameraPosWithMarkers(std::vector< aruco::Marker > Markers, cv::Point3f &pos_camera, Attitude &atti_camera, int flag /*= 0*/)

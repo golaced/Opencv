@@ -8,7 +8,7 @@ int marker_col_num;
 double marker_size;
 double markers_row_distance;
 double markers_col_distance;
-int show_traj;
+int show_traj,show_camera,save_video,read_video_num;
 int camera_sel;
 int use_flow;
 string cal_file;
@@ -25,10 +25,33 @@ void loadMarkerConfig(const std::string &configfilename)
     markers_col_distance = m_inifile.getDoubleValue(section, "markers_L_distance", ret);
     camera_sel=m_inifile.getIntValue(section, "camera_sel", ret);
     show_traj=m_inifile.getIntValue(section, "show_traj", ret);
+    show_camera=m_inifile.getIntValue(section, "show_camera", ret);
+    save_video=m_inifile.getIntValue(section, "save_video", ret);
+    read_video_num=m_inifile.getIntValue(section, "read_video_num", ret);
     cal_file=m_inifile.getStringValue(section, "cal_file", ret);
     use_flow=m_inifile.getIntValue(section, "use_flow", ret);
     cout<<"row_num="<<marker_row_num<<"  col_num="<<marker_col_num<<"  size="<<marker_size<<"  ros_dis="<<markers_row_distance<<"  col_dis="<<markers_col_distance<<endl;
 }
+
+void loadMap(const std::string &configfilename)
+{
+    inifile::IniFile m_inifile;
+    m_inifile.load(configfilename);
+    std::string section("MarkerConfig");
+    int ret = 0;
+    marker_row_num = m_inifile.getIntValue(section, "marker_H_num", ret);
+    marker_col_num = m_inifile.getIntValue(section, "marker_L_num", ret);
+    marker_size = m_inifile.getDoubleValue(section, "marker_size", ret)/100.;
+    markers_row_distance = m_inifile.getDoubleValue(section, "markers_H_distance", ret);
+    markers_col_distance = m_inifile.getDoubleValue(section, "markers_L_distance", ret);
+    camera_sel=m_inifile.getIntValue(section, "camera_sel", ret);
+    show_traj=m_inifile.getIntValue(section, "show_traj", ret);
+    show_camera=m_inifile.getIntValue(section, "show_camera", ret);
+    cal_file=m_inifile.getStringValue(section, "cal_file", ret);
+    use_flow=m_inifile.getIntValue(section, "use_flow", ret);
+    cout<<"row_num="<<marker_row_num<<"  col_num="<<marker_col_num<<"  size="<<marker_size<<"  ros_dis="<<markers_row_distance<<"  col_dis="<<markers_col_distance<<endl;
+}
+
 
 void init_sys_para(void)
 {

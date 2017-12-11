@@ -27,7 +27,7 @@ extern int marker_col_num;
 extern double marker_size;
 extern double markers_row_distance;
 extern double markers_col_distance;
-extern int show_traj;
+extern int show_traj,show_camera,save_video,read_video_num;
 extern int camera_sel;
 extern int use_flow;
 extern string cal_file;
